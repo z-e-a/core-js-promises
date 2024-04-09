@@ -53,12 +53,17 @@ function getPromiseResult(source) {
  * [Promise.reject(1), Promise.reject(2), Promise.reject(3)]    => Promise rejected
  */
 function getFirstResolvedPromiseResult(promises) {
-  return new Promise((resolve, reject) => {
-    Promise.race(promises)
-      .then((value) => resolve(value))
-      .catch((message) => reject(message));
-  });
+  return Promise.race(promises).then((value) => value);
 }
+
+/// Alternative more complex solution:
+// function getFirstResolvedPromiseResult(promises) {
+//   return new Promise((resolve, reject) => {
+//     Promise.race(promises)
+//       .then((value) => resolve(value))
+//       .catch((message) => reject(message));
+//   });
+// }
 
 /**
  * Returns containing the value of the first promise of a resolved or a rejected.
