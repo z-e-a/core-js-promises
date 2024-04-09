@@ -80,12 +80,17 @@ function getFirstResolvedPromiseResult(promises) {
  * [promise3, promise4, promise6] => Promise rejected with 6
  */
 function getFirstPromiseResult(promises) {
-  return new Promise((resolve, reject) => {
-    Promise.any(promises)
-      .then((value) => resolve(value))
-      .catch((message) => reject(message));
-  });
+  return Promise.any(promises);
 }
+
+/// Alternative more complex solution:
+// function getFirstPromiseResult(promises) {
+//   return new Promise((resolve, reject) => {
+//     Promise.any(promises)
+//       .then((value) => resolve(value))
+//       .catch((message) => reject(message));
+//   });
+// }
 
 /**
  * Attempts to resolve all provided promises. If all promises resolve successfully, it returns a promise that resolves with an array of their values.
